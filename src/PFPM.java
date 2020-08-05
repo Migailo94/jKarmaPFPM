@@ -10,6 +10,10 @@ import org.jkarma.pbcd.detectors.PBCD;
 import org.jkarma.pbcd.events.*;
 import org.jkarma.pbcd.patterns.Patterns;
 import org.jkarma.pbcd.similarities.UnweightedJaccard;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.OptionHandlerFilter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -20,19 +24,27 @@ import java.util.stream.Stream;
 
 public class PFPM {
 
+    @Option(required=true, name="-blockSize", usage="block size")
     public int blockSize = 10;
 
+    @Option(required=true, name="-minPer", usage="minimun periodicity")
     public int minPer = 2;
 
+    @Option(required=true, name="-maxPer", usage="maximun periodicity")
     public int maxPer = 20;
 
+    @Option(required=true, name="-minAvgPer", usage="minimun avarage periodicity")
     public float minAvgPer = 2f;
 
+    @Option(required=true, name="-maxAvgPer", usage="maximun avarage periodicity")
     public float maxAvgPer = 20f;
 
+    @Option(required=true, name="-minChange", usage="minimum change threshold")
     public float minChange = 0.5f;
 
-    public File inputFle = new File("dataset/synthetic/dataset 1.csv");
+    @Option(required=true, name="-i", usage="input filename")
+    // public File inputFle = new File("dataset/synthetic/dataset 1.csv");
+    public File inputFile = null;
 
     public PBCD<Transaction, Feature, PeriodSet, Boolean> getPBCD(){
         WindowingStrategy<PeriodSet> wmodel = Windows.cumulativeSliding(); // Mixed
@@ -48,7 +60,7 @@ public class PFPM {
     }
 
     public Stream<Transaction> getDataset() throws IOException {
-        return Utils.parseStream(inputFle, Transaction.class);
+        return Utils.parseStream(this.inputFile, Transaction.class);
     }
 
     public static void main(String[] args) throws IOException {
@@ -72,6 +84,10 @@ public class PFPM {
         } */
 
         PFPM app = new PFPM();
+
+        final CmdLineParser argsParser = new CmdLineParser(app);
+
+        try { argsParser.parseArgument(args);
 
         Stream<Transaction> dataset = app.getDataset();
 
@@ -237,5 +253,13 @@ public class PFPM {
         System.out.println("Precision " + (double)TP/(TP + FP));
         System.out.println("F1 " + (double)(2*TP)/(2*TP + FP + FN));
         System.out.println("Recall " + (double)TP/(TP + FN));
+
+        } catch (CmdLineException e) {
+            System.err.println(e.getMessage());
+            System.err.println("java SampleMain [options...] arguments...");
+            argsParser.printUsage(System.err);
+            System.err.println();
+            System.err.println(" Example: java SampleMain " + argsParser.printExample(OptionHandlerFilter.ALL));
+        }
     }
 }

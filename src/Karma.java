@@ -11,6 +11,10 @@ import org.jkarma.pbcd.detectors.PBCD;
 import org.jkarma.pbcd.events.*;
 import org.jkarma.pbcd.patterns.Patterns;
 import org.jkarma.pbcd.similarities.UnweightedJaccard;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.OptionHandlerFilter;
 
 import java.io.*;
 import java.time.Instant;
@@ -20,13 +24,18 @@ import java.util.stream.Stream;
 
 public class Karma {
 
+    @Option(required=true, name="-blockSize", usage="block size")
     public int blockSize = 10;
 
+    @Option(required=true, name="-maxAvgPer", usage="maximun avarage periodicity")
     public float maxAvgPer = 20f;
 
+    @Option(required=true, name="-minChange", usage="minimum change threshold")
     public float minChange = 0.5f;
 
-    public File inputFle = new File("dataset/synthetic/dataset 1.csv");
+    @Option(required=true, name="-i", usage="input filename")
+    public File inputFile = null;
+    // public File inputFle = new File("dataset/synthetic/dataset 1.csv");
 
     public PBCD<Transaction, Feature, TidSet, Boolean> getPBCD() throws IOException {
         Stream<Transaction> dataset = this.getDataset();
@@ -48,7 +57,7 @@ public class Karma {
     }
 
     public Stream<Transaction> getDataset() throws IOException {
-        return Utils.parseStream(inputFle, Transaction.class);
+        return Utils.parseStream(this.inputFile, Transaction.class);
     }
 
     public static void main(String[] args) throws IOException {
@@ -72,6 +81,10 @@ public class Karma {
         } */
 
         Karma app = new Karma();
+
+        final CmdLineParser argsParser = new CmdLineParser(app);
+
+        try { argsParser.parseArgument(args);
 
         Stream<Transaction> dataset = app.getDataset();
 
@@ -237,5 +250,13 @@ public class Karma {
         System.out.println("Precision " + (double)TP/(TP + FP));
         System.out.println("F1 " + (double)(2*TP)/(2*TP + FP + FN));
         System.out.println("Recall " + (double)TP/(TP + FN));
+
+        } catch (CmdLineException e) {
+            System.err.println(e.getMessage());
+            System.err.println("java SampleMain [options...] arguments...");
+            argsParser.printUsage(System.err);
+            System.err.println();
+            System.err.println(" Example: java SampleMain " + argsParser.printExample(OptionHandlerFilter.ALL));
+        }
     }
 }
