@@ -11,45 +11,34 @@ import org.jkarma.pbcd.events.*;
 import org.jkarma.pbcd.patterns.Patterns;
 import org.jkarma.pbcd.similarities.UnweightedJaccard;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Stream;
-
-/* Per ogni dataset produrre dei grafici in cui mostrare:
-
-    1) Tempo di esecuzione
-    2) Numero di change points
-    3) Numero totale di pattern scoperti
-    4) Numero medio di pattern scoperti per change point
-
-    al variare di blockSize, maxPer e minAvgPer
- */
 
 public class PFPM {
 
     public int blockSize = 10;
 
-    public int minPer = 1;
+    public int minPer = 2;
 
-    public int maxPer = 10;
+    public int maxPer = 20;
 
-    public float minAvgPer = 5f;
+    public float minAvgPer = 2f;
 
-    public float maxAvgPer = 1000f;
+    public float maxAvgPer = 20f;
 
     public float minChange = 0.5f;
 
-    public File inputFle = new File("dataset/dataset.csv");
+    public File inputFle = new File("dataset/synthetic/dataset 1.csv");
 
     public PBCD<Transaction, Feature, PeriodSet, Boolean> getPBCD(){
         WindowingStrategy<PeriodSet> wmodel = Windows.cumulativeSliding(); // Mixed
         PeriodSetProvider<Feature> accessor = new PeriodSetProvider<Feature>(wmodel);
 
-        MiningStrategy<Feature,PeriodSet> strategy = Strategies.uponItemsets(new HashSet<Feature>())
+        MiningStrategy<Feature,PeriodSet> strategy = Strategies.uponItemsets(new HashSet<Feature>()).limitDepth(3)
                 .pfpm(minPer, maxPer, minAvgPer, maxAvgPer).dfs(accessor);
 
         return Detectors.upon(strategy)
@@ -67,8 +56,8 @@ public class PFPM {
 
         final long startTime = System.currentTimeMillis();
 
-        File one = new File("1");
-        File two = new File("2");
+        File one = new File("PFPM changes");
+        // File two = new File("2");
 
         if(one.exists()){
             one.delete();
@@ -76,11 +65,11 @@ public class PFPM {
             new FileNotFoundException();
         }
 
-        if(two.exists()){
+        /* if(two.exists()){
             two.delete();
         }else{
             new FileNotFoundException();
-        }
+        } */
 
         PFPM app = new PFPM();
 
@@ -124,12 +113,12 @@ public class PFPM {
                 Instant B_FIRST = changeDetectedEvent.getLatestBlock().getFirstInstant();
                 Instant B_LAST = changeDetectedEvent.getLatestBlock().getLastInstant();
 
-                String tempolarWindow = "[" + W1_FIRST + "," + W1_LAST + "] [" + B_FIRST + "," + B_LAST + "]";
+                String tempolarWindow = "[" + W1_FIRST + " " + W1_LAST + "] [" + B_FIRST + " " + B_LAST + "]";
 
                 String content = tempolarWindow + "," + changeDetectedEvent.getAmount() + "," + changeDetected + "\n";
 
                 try {
-                    FileWriter writer = new FileWriter("1", true);
+                    FileWriter writer = new FileWriter("PFPM changes", true);
                     writer.write(content);
                     writer.close();
                 } catch (IOException e) {
@@ -180,12 +169,12 @@ public class PFPM {
                 Instant B_FIRST = changeNotDetectedEvent.getLatestBlock().getFirstInstant();
                 Instant B_LAST = changeNotDetectedEvent.getLatestBlock().getLastInstant();
 
-                String tempolarWindow = "[" + W1_FIRST + "," + W1_LAST + "] [" + B_FIRST + "," + B_LAST + "]";
+                String tempolarWindow = "[" + W1_FIRST + " " + W1_LAST + "] [" + B_FIRST + " " + B_LAST + "]";
 
                 String content = tempolarWindow + "," + changeNotDetectedEvent.getAmount() + "," + changeNotDetected + "\n";
 
                 try {
-                    FileWriter writer = new FileWriter("1", true);
+                    FileWriter writer = new FileWriter("PFPM changes", true);
                     writer.write(content);
                     writer.close();
                 } catch (IOException e) {
@@ -196,5 +185,57 @@ public class PFPM {
         dataset.forEach(detector);
 
         System.out.println("Running time " + (System.currentTimeMillis() - startTime) + " ms");
+
+        ArrayList labels = new ArrayList();
+        ArrayList groudtruth = new ArrayList();
+
+        BufferedReader br = new BufferedReader(new FileReader("PFPM changes"));
+        String line = "";
+        labels.add(0);
+        while ((line = br.readLine()) != null) {
+            String[] split = line.split(",");
+            labels.add(Integer.parseInt(split[2]));
+        }
+        br.close();
+
+        br = new BufferedReader(new FileReader("dataset/synthetic/groudtruth"));
+        line = "";
+        while ((line = br.readLine()) != null) {
+            groudtruth.add(Integer.parseInt(line));
+        }
+        br.close();
+
+        System.out.println("\nLabels " + labels.toString());
+        System.out.println("Groud truth " + groudtruth.toString());
+
+        int TP = 0, FN = 0, FP = 0, TN = 0;
+
+        for(int i = 0; i < labels.size(); i++){
+            if(labels.get(i).equals(0) && groudtruth.get(i).equals(0)){
+                TN++;
+            }else{
+                if(labels.get(i).equals(0) && groudtruth.get(i).equals(1)){
+                    FN++;
+                }else{
+                    if(labels.get(i).equals(1) && groudtruth.get(i).equals(0)){
+                        FP++;
+                    }else{
+                        if(labels.get(i).equals(1) && groudtruth.get(i).equals(1)){
+                            TP++;
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("\nTN " + TN);
+        System.out.println("TP " + TP);
+        System.out.println("FN " + FN);
+        System.out.println("FP " + FP);
+
+        System.out.println("\nAccuracy " + (double)(TP + TN)/(TN + TP + FN + FP));
+        System.out.println("Precision " + (double)TP/(TP + FP));
+        System.out.println("F1 " + (double)(2*TP)/(2*TP + FP + FN));
+        System.out.println("Recall " + (double)TP/(TP + FN));
     }
 }
