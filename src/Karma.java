@@ -198,15 +198,15 @@ public class Karma {
         }
         br.close();
 
-        br = new BufferedReader(new FileReader("dataset/groudtruth"));
+        br = new BufferedReader(new FileReader("dataset/synthetic/groudtruth"));
         line = "";
         while ((line = br.readLine()) != null) {
             groudtruth.add(Integer.parseInt(line));
         }
         br.close();
 
-        System.out.println(labels.toString());
-        System.out.println(groudtruth.toString());
+        System.out.println("\nLabels " + labels.toString());
+        System.out.println("Groud truth " + groudtruth.toString());
 
         int TP = 0, FN = 0, FP = 0, TN = 0;
 
@@ -228,7 +228,7 @@ public class Karma {
             }
         }
 
-        System.out.println("TN " + TN);
+        System.out.println("\nTN " + TN);
         System.out.println("TP " + TP);
         System.out.println("FN " + FN);
         System.out.println("FP " + FP);
@@ -236,5 +236,6 @@ public class Karma {
         System.out.println("\nAccuracy " + (double)(TP + TN)/(TN + TP + FN + FP));
         System.out.println("Precision " + (double)TP/(TP + FP));
         System.out.println("F1 " + (double)(2*TP)/(2*TP + FP + FN));
+        System.out.println("Recall " + (double)TP/(TP + FN));
     }
 }
