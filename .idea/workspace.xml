@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4aa963af-2e68-4cf3-8163-3164ce441030" name="Default Changelist" comment="" />
+    <list default="true" id="4aa963af-2e68-4cf3-8163-3164ce441030" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Karma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Karma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PFPM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PFPM.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,23 +18,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PFPM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="38" column="82" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="82" />
+            <state relative-caret-position="982">
+              <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Karma.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="40" column="56" lean-forward="true" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state>
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -52,8 +53,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dataset/dataset.csv" />
-        <option value="$PROJECT_DIR$/src/PFPM.java" />
         <option value="$PROJECT_DIR$/src/Karma.java" />
+        <option value="$PROJECT_DIR$/src/PFPM.java" />
       </list>
     </option>
   </component>
@@ -70,7 +71,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -92,6 +92,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -127,11 +128,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Karma">
+  <component name="RunManager" selected="Application.PFPM">
     <configuration name="Karma" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Karma" />
       <module name="jKarmaPFPM" />
-      <option name="PROGRAM_PARAMETERS" value="-i &quot;dataset/synthetic/dataset 1.csv&quot; -maxAvgPer 10 -minChange 0.5 -blockSize 10" />
+      <option name="PROGRAM_PARAMETERS" value="-i &quot;dataset/synthetic/dataset 5.csv&quot; -maxAvgPer 35 -minChange 0.70 -blockSize 10" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -139,7 +140,7 @@
     <configuration name="PFPM" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PFPM" />
       <module name="jKarmaPFPM" />
-      <option name="PROGRAM_PARAMETERS" value="-blockSize 10 -minPer 2 -maxPer 10 -minAvgPer 2 -maxAvgPer 10 -minChange 0.5 -i &quot;dataset/synthetic/dataset 1.csv&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="-blockSize 10 -minPer 1 -maxPer 5 -minAvgPer 5 -maxAvgPer 1000 -minChange 0.5 -i &quot;dataset/real/PID 1.csv&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,8 +151,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Karma" />
         <item itemvalue="Application.PFPM" />
+        <item itemvalue="Application.Karma" />
       </list>
     </recent_temporary>
   </component>
@@ -181,7 +182,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31208053" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3167785" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -190,7 +191,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.29748604" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2988827" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -251,13 +252,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dataset/dataset.arff.csv" />
-    <entry file="file://$PROJECT_DIR$/dataset/PID 6.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/PID 6.csv" />
     <entry file="file://$PROJECT_DIR$/dataset/dataset1.csv" />
     <entry file="file://$PROJECT_DIR$/src/PartialPeriodicEPEvaluator.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -296,29 +291,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/foodmart.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/PID 7.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/foodmart.csv" />
+    <entry file="file://$PROJECT_DIR$/dataset/PID 7.csv" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/groudtruth">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/dataset.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/groudtruth" />
+    <entry file="file://$PROJECT_DIR$/dataset/dataset.csv" />
     <entry file="file://$PROJECT_DIR$/dataset/real/PID 1.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -326,13 +305,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/1">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="108" lean-forward="true" selection-start-line="2" selection-start-column="108" selection-end-line="2" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/1" />
     <entry file="file://$PROJECT_DIR$/dataset/synthetic/dataset 4.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -364,20 +337,17 @@
     <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PFPM.java">
+    <entry file="file://$PROJECT_DIR$/src/Karma.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="38" column="82" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="82" />
+        <state>
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Karma.java">
+    <entry file="file://$PROJECT_DIR$/src/PFPM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="56" lean-forward="true" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="982">
+          <caret line="122" column="41" lean-forward="true" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -387,7 +357,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>PFPM</last-edited>
+          <last-edited>ECLAT</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

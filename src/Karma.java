@@ -246,10 +246,10 @@ public class Karma {
         System.out.println("FN " + FN);
         System.out.println("FP " + FP);
 
-        System.out.println("\nAccuracy " + (double)(TP + TN)/(TN + TP + FN + FP));
-        System.out.println("Precision " + (double)TP/(TP + FP));
-        System.out.println("F1 " + (double)(2*TP)/(2*TP + FP + FN));
-        System.out.println("Recall " + (double)TP/(TP + FN));
+        System.out.printf("\nAccuracy %.3f", (double)(TP + TN)/(TN + TP + FN + FP));
+        System.out.printf("\nPrecision %.3f", (double)TP/(TP + FP));
+        System.out.printf("\nRecall %.3f", (double)TP/(TP + FN));
+        System.out.printf("\nF1 %.3f", (double)(2*TP)/(2*TP + FP + FN));
 
         } catch (CmdLineException e) {
             System.err.println(e.getMessage());
