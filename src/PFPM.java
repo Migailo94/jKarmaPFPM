@@ -68,7 +68,7 @@ public class PFPM {
 
         final long startTime = System.currentTimeMillis();
 
-        File one = new File("PFPM changes");
+        File one = new File("PFPM changes.csv");
         // File two = new File("2");
 
         if(one.exists()){
@@ -132,10 +132,10 @@ public class PFPM {
 
                     String tempolarWindow = "[" + W1_FIRST + " " + W1_LAST + "] [" + B_FIRST + " " + B_LAST + "]";
 
-                    String content = tempolarWindow + "," + changeDetectedEvent.getAmount() + "," + changeDetected + "\n";
+                    String content = tempolarWindow + ";" + changeDetectedEvent.getAmount() + ";" + changeDetected + "\n";
 
                     try {
-                        FileWriter writer = new FileWriter("PFPM changes", true);
+                        FileWriter writer = new FileWriter("PFPM changes.csv", true);
                         writer.write(content);
                         writer.close();
                     } catch (IOException e) {
@@ -188,10 +188,10 @@ public class PFPM {
 
                     String tempolarWindow = "[" + W1_FIRST + " " + W1_LAST + "] [" + B_FIRST + " " + B_LAST + "]";
 
-                    String content = tempolarWindow + "," + changeNotDetectedEvent.getAmount() + "," + changeNotDetected + "\n";
+                    String content = tempolarWindow + ";" + changeNotDetectedEvent.getAmount() + ";" + changeNotDetected + "\n";
 
                     try {
-                        FileWriter writer = new FileWriter("PFPM changes", true);
+                        FileWriter writer = new FileWriter("PFPM changes.csv", true);
                         writer.write(content);
                         writer.close();
                     } catch (IOException e) {
@@ -211,11 +211,11 @@ public class PFPM {
                 ArrayList labels = new ArrayList();
                 ArrayList groudtruth = new ArrayList();
 
-                BufferedReader br = new BufferedReader(new FileReader("PFPM changes"));
+                BufferedReader br = new BufferedReader(new FileReader("PFPM changes.csv"));
                 String line = "";
                 labels.add(0);
                 while ((line = br.readLine()) != null) {
-                    String[] split = line.split(",");
+                    String[] split = line.split(";");
                     labels.add(Integer.parseInt(split[2]));
                 }
                 br.close();
