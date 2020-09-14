@@ -65,20 +65,20 @@ public class Karma {
 
         final long startTime = System.currentTimeMillis();
 
-        File one = new File("ECLAT changes.csv");
-        // File two = new File("2");
+        File changes = new File("ECLAT changes.csv");
+        File pattern = new File("ECLAT pattern.csv");
 
-        if(one.exists()){
-            one.delete();
+        if(changes.exists()){
+            changes.delete();
         }else{
             new FileNotFoundException();
         }
 
-        /* if(two.exists()){
-            two.delete();
+        if(pattern.exists()){
+            pattern.delete();
         }else{
             new FileNotFoundException();
-        } */
+        }
 
         Karma app = new Karma();
 
@@ -159,18 +159,18 @@ public class Karma {
 
                     System.out.println();
 
-                    // patters += p.getItemSet() + ";";
+                    patters += p.getItemSet() + ";";
                 });
-                // patters += "\n"; */
+                patters += "\n";
 
-                /* try {
-                    FileWriter writer = new FileWriter("2", true);
+                try {
+                    FileWriter writer = new FileWriter("ECLAT pattern.csv", true);
                     writer.write(patters);
                     patters = "";
                     writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } */
+                }
             }
 
             @Override

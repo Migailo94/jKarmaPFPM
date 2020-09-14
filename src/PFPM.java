@@ -47,6 +47,7 @@ public class PFPM {
     public File inputFile = null;
 
     public PBCD<Transaction, Feature, PeriodSet, Boolean> getPBCD(){
+
         WindowingStrategy<PeriodSet> wmodel = Windows.cumulativeSliding(); // Mixed
         PeriodSetProvider<Feature> accessor = new PeriodSetProvider<Feature>(wmodel);
 
@@ -68,20 +69,20 @@ public class PFPM {
 
         final long startTime = System.currentTimeMillis();
 
-        File one = new File("PFPM changes.csv");
-        // File two = new File("2");
+        File changes = new File("PFPM changes.csv");
+        File pattern = new File("PFPM pattern.csv");
 
-        if(one.exists()){
-            one.delete();
+        if(changes.exists()){
+            changes.delete();
         }else{
             new FileNotFoundException();
         }
 
-        /* if(two.exists()){
-            two.delete();
+        if(pattern.exists()){
+            pattern.delete();
         }else{
             new FileNotFoundException();
-        } */
+        }
 
         PFPM app = new PFPM();
 
@@ -163,18 +164,18 @@ public class PFPM {
 
                         System.out.println();
 
-                        // patters += p.getItemSet() + ";";
+                        patters += p.getItemSet() + ";";
                     });
-                    // patters += "\n"; */
+                    patters += "\n";
 
-                /* try {
-                    FileWriter writer = new FileWriter("2", true);
-                    writer.write(patters);
-                    patters = "";
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } */
+                    try {
+                        FileWriter writer = new FileWriter("PFPM pattern.csv", true);
+                        writer.write(patters);
+                        patters = "";
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
